@@ -9,10 +9,15 @@
 #######################################
 # Methods and Functions (KEYWORD2)
 #######################################
-assertEqual		     KEYWORD2
-assertNotEqual	     KEYWORD2
-assertGreaterThan	 KEYWORD2
-assertLessThan       KEYWORD2
+assertEqual		           KEYWORD2
+assertNotEqual	           KEYWORD2
+assertGreaterThan	       KEYWORD2
+assertLessThan             KEYWORD2
+printFunctionNameUnderTest KEYWORD2
+printTestStart             KEYWORD2
+printTestEnd               KEYWORD2
+printTestResultWithMsg     KEYWORD2
+setHarwareSerial           KEYWORD2
 
 #######################################
 # Constants (LITERAL1)

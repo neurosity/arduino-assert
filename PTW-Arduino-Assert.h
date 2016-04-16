@@ -14,6 +14,7 @@
 class PTW_Arduino_Assert {
 
 public:
+    PTW_Arduino_Assert();
     // EQUAL
     boolean assertEqual(boolean a, boolean b);
     boolean assertEqual(boolean a, boolean b, char *msg);
@@ -51,9 +52,21 @@ public:
     boolean assertLessThan(int a, int b);
     boolean assertLessThan(int a, int b, char *msg);
 
-    void printFunctionNameUnderTest(char *title);
-    void printTestStart(void);
-    void printTestEnd(void);
-    boolean printTestResultWithMsg(boolean testPassed, char *msg);
+    void begin(void);
+    void end(void);
+    void function(char *title);
 
-}
+    void setHarwareSerial(HardwareSerial *serial);
+
+private:
+    HardwareSerial _serial;
+    boolean printTestResultWithMsg(boolean testPassed, char *msg);
+    int numberOfTests;
+    int numberOfTestsFailed;
+    int numberOfTestsPassed;
+};
+
+// This let's us call into the class from within the library if necessary
+extern PTW_Arduino_Assert test;
+
+#endif
