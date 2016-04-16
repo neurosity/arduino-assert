@@ -16,39 +16,44 @@ class PTW_Arduino_Assert {
 public:
     // EQUAL
     boolean assertEqual(boolean a, boolean b);
-    boolean assertEqual(boolean a, boolean b, char msg[]);
+    boolean assertEqual(boolean a, boolean b, char *msg);
     boolean assertEqual(byte a, byte b);
-    boolean assertEqual(byte a, byte b, char msg[]);
+    boolean assertEqual(byte a, byte b, char *msg);
     boolean assertEqual(char a, char b);
-    boolean assertEqual(char a, char b, char msg[]);
+    boolean assertEqual(char a, char b, char *msg);
     boolean assertEqual(int a, int b);
-    boolean assertEqual(int a, int b, char msg[]);
+    boolean assertEqual(int a, int b, char *msg);
     // NOT EQUAL
     boolean assertNotEqual(boolean a, boolean b);
-    boolean assertNotEqual(boolean a, boolean b, char msg[]);
+    boolean assertNotEqual(boolean a, boolean b, char *msg);
     boolean assertNotEqual(byte a, byte b);
-    boolean assertNotEqual(byte a, byte b, char msg[]);
+    boolean assertNotEqual(byte a, byte b, char *msg);
     boolean assertNotEqual(char a, char b);
-    boolean assertNotEqual(char a, char b, char msg[]);
+    boolean assertNotEqual(char a, char b, char *msg);
     boolean assertNotEqual(int a, int b);
-    boolean assertNotEqual(int a, int b, char msg[]);
+    boolean assertNotEqual(int a, int b, char *msg);
     // GREATER THAN
     boolean assertGreaterThan(boolean a, boolean b);
-    boolean assertGreaterThan(boolean a, boolean b, char msg[]);
+    boolean assertGreaterThan(boolean a, boolean b, char *msg);
     boolean assertGreaterThan(byte a, byte b);
-    boolean assertGreaterThan(byte a, byte b, char msg[]);
+    boolean assertGreaterThan(byte a, byte b, char *msg);
     boolean assertGreaterThan(char a, char b);
-    boolean assertGreaterThan(char a, char b, char msg[]);
+    boolean assertGreaterThan(char a, char b, char *msg);
     boolean assertGreaterThan(int a, int b);
-    boolean assertGreaterThan(int a, int b, char msg[]);
+    boolean assertGreaterThan(int a, int b, char *msg);
     // LESS THAN
     boolean assertLessThan(boolean a, boolean b);
-    boolean assertLessThan(boolean a, boolean b, char msg[]);
+    boolean assertLessThan(boolean a, boolean b, char *msg);
     boolean assertLessThan(byte a, byte b);
-    boolean assertLessThan(byte a, byte b, char msg[]);
+    boolean assertLessThan(byte a, byte b, char *msg);
     boolean assertLessThan(char a, char b);
-    boolean assertLessThan(char a, char b, char msg[]);
+    boolean assertLessThan(char a, char b, char *msg);
     boolean assertLessThan(int a, int b);
-    boolean assertLessThan(int a, int b, char msg[]);
+    boolean assertLessThan(int a, int b, char *msg);
+
+    void printFunctionNameUnderTest(char *title);
+    void printTestStart(void);
+    void printTestEnd(void);
+    boolean printTestResultWithMsg(boolean testPassed, char *msg);
 
 }

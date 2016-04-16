@@ -1,0 +1,19 @@
+#######################################
+# Syntax Coloring Map SD
+#######################################
+
+#######################################
+# Datatypes (KEYWORD1)
+#######################################
+
+#######################################
+# Methods and Functions (KEYWORD2)
+#######################################
+assertEqual		     KEYWORD2
+assertNotEqual	     KEYWORD2
+assertGreaterThan	 KEYWORD2
+assertLessThan       KEYWORD2
+
+#######################################
+# Constants (LITERAL1)
+#######################################
