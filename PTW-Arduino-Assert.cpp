@@ -310,7 +310,7 @@ void PTW_Arduino_Assert::end(void) {
 boolean PTW_Arduino_Assert::printTestResultWithMsg(boolean testPassed, char *msg) {
     if (_hardwareSerial) {
         if (!testPassed) {
-            _hardwareSerial->print("   Failed - ");
+            _hardwareSerial->print(" ** Failed - ");
         } else {
             _hardwareSerial->print("   Passed - ");
         }
@@ -326,7 +326,7 @@ boolean PTW_Arduino_Assert::printTestResultWithMsg(boolean testPassed, char *msg
     // }
     if (_usbSerial) {
         if (!testPassed) {
-            _usbSerial->print("   Failed - ");
+            _usbSerial->print(" ** Failed - ");
         } else {
             _usbSerial->print("   Passed - ");
         }
