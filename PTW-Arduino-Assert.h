@@ -65,14 +65,15 @@ public:
     void end(void);
     void describe(char *title);
 
-    void setSerial(USBSerial &serial);
+    // void setSerial(USBSerial &serial);
     void setSerial(HardwareSerial &serial);
     // void setSerial(SoftwareSerial *serial);
 
 private:
     HardwareSerial *_hardwareSerial;
     // SoftwareSerial *_softwareSerial;
-    USBSerial *_usbSerial;
+
+    // USBSerial *_usbSerial;
     byte serialType;
     boolean printTestResultWithMsg(boolean testPassed, char *msg);
     int numberOfTests;

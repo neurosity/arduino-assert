@@ -237,13 +237,13 @@ void PTW_Arduino_Assert::begin(void) {
     //     _softwareSerial.println("------- AUTO TEST BEGIN -------");
     //     _softwareSerial.println("-------------------------------");
     // }
-    if (_usbSerial) {
-        _usbSerial->println("-------------------------------");
-        _usbSerial->println("-- PTW-Arduino-Assert v0.1.0 --");
-        _usbSerial->println("-------------------------------");
-        _usbSerial->println("------- AUTO TEST BEGIN -------");
-        _usbSerial->println("-------------------------------");
-    }
+    // if (_usbSerial) {
+    //     _usbSerial->println("-------------------------------");
+    //     _usbSerial->println("-- PTW-Arduino-Assert v0.1.0 --");
+    //     _usbSerial->println("-------------------------------");
+    //     _usbSerial->println("------- AUTO TEST BEGIN -------");
+    //     _usbSerial->println("-------------------------------");
+    // }
     numberOfTests = 0;
     numberOfTestsFailed = 0;
     numberOfTestsPassed = 0;
@@ -258,10 +258,10 @@ void PTW_Arduino_Assert::describe(char *title) {
     //     _softwareSerial.print(" #");
     //     _softwareSerial.println(msg);
     // }
-    if (_usbSerial) {
-        _usbSerial->print(" #");
-        _usbSerial->println(title);
-    }
+    // if (_usbSerial) {
+    //     _usbSerial->print(" #");
+    //     _usbSerial->println(title);
+    // }
 }
 
 void PTW_Arduino_Assert::end(void) {
@@ -289,18 +289,18 @@ void PTW_Arduino_Assert::end(void) {
     //     _softwareSerial.println("-------- AUTO TEST END --------");
     //     _softwareSerial.println("-------------------------------");
     // }
-    if (_usbSerial) {
-        _usbSerial->println("-------------------------------");
-        _usbSerial->print("  Total Tests: ");
-        _usbSerial->println(numberOfTests);
-        _usbSerial->print("  Tests Passed: ");
-        _usbSerial->println(numberOfTestsPassed);
-        _usbSerial->print("  Tests Failed: ");
-        _usbSerial->println(numberOfTestsFailed);
-        _usbSerial->println("-------------------------------");
-        _usbSerial->println("-------- AUTO TEST END --------");
-        _usbSerial->println("-------------------------------");
-    }
+    // if (_usbSerial) {
+    //     _usbSerial->println("-------------------------------");
+    //     _usbSerial->print("  Total Tests: ");
+    //     _usbSerial->println(numberOfTests);
+    //     _usbSerial->print("  Tests Passed: ");
+    //     _usbSerial->println(numberOfTestsPassed);
+    //     _usbSerial->print("  Tests Failed: ");
+    //     _usbSerial->println(numberOfTestsFailed);
+    //     _usbSerial->println("-------------------------------");
+    //     _usbSerial->println("-------- AUTO TEST END --------");
+    //     _usbSerial->println("-------------------------------");
+    // }
 }
 
 /***************************************************/
@@ -324,14 +324,14 @@ boolean PTW_Arduino_Assert::printTestResultWithMsg(boolean testPassed, char *msg
     //     }
     //     _softwareSerial.println(msg);
     // }
-    if (_usbSerial) {
-        if (!testPassed) {
-            _usbSerial->print(" ** Failed - ");
-        } else {
-            _usbSerial->print("   Passed - ");
-        }
-        _usbSerial->println(msg);
-    }
+    // if (_usbSerial) {
+    //     if (!testPassed) {
+    //         _usbSerial->print(" ** Failed - ");
+    //     } else {
+    //         _usbSerial->print("   Passed - ");
+    //     }
+    //     _usbSerial->println(msg);
+    // }
     return testPassed;
 }
 
@@ -344,8 +344,8 @@ void PTW_Arduino_Assert::setSerial(HardwareSerial &serial) {
 //     _softwareSerial = serial;
 // }
 
-void PTW_Arduino_Assert::setSerial(USBSerial &serial) {
-    _usbSerial = &serial;
-}
+// void PTW_Arduino_Assert::setSerial(USBSerial &serial) {
+//     _usbSerial = &serial;
+// }
 
 PTW_Arduino_Assert test;
