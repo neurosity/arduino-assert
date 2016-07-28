@@ -14,15 +14,16 @@ PTW_Arduino_Assert::PTW_Arduino_Assert() {
     numberOfTestsFailed = 0;
     numberOfTestsPassed = 0;
     serialType = SERIAL_HARDWARE;
+    failVerbosity = false;
 }
 /***************************************************/
 /** PUBLIC METHODS *********************************/
 /***************************************************/
 // EQUAL
 //  boolean
-boolean PTW_Arduino_Assert::assertEqual(boolean a, boolean b) {
+boolean PTW_Arduino_Assert::assertEqualBoolean(boolean actual, boolean expected) {
     numberOfTests++;
-    boolean passed = (a == b);
+    boolean passed = (actual == expected);
     if (passed) {
         numberOfTestsPassed++;
     } else {
@@ -30,13 +31,19 @@ boolean PTW_Arduino_Assert::assertEqual(boolean a, boolean b) {
     }
     return passed;
 }
-boolean PTW_Arduino_Assert::assertEqual(boolean a, boolean b, char *msg) {
-    return printTestResultWithMsg(assertEqual(a, b), msg);
+boolean PTW_Arduino_Assert::assertEqualBoolean(boolean actual, boolean expected, char *msg) {
+    boolean testPassed = printTestResultWithMsg(assertEqualBoolean(actual, expected), msg);
+
+    if (failVerbosity) {
+        printVerboseFailMessageBoolean(actual,expected);
+    }
+
+    return testPassed;
 }
 //  byte
-// boolean PTW_Arduino_Assert::assertEqual(byte a, byte b) {
+// boolean PTW_Arduino_Assert::assertEqual(byte actual, byte expected) {
 //     numberOfTests++;
-//     boolean passed = (a == b);
+//     boolean passed = (actual == expected);
 //     if (passed) {
 //         numberOfTestsPassed++;
 //     } else {
@@ -44,13 +51,13 @@ boolean PTW_Arduino_Assert::assertEqual(boolean a, boolean b, char *msg) {
 //     }
 //     return passed;
 // }
-// boolean PTW_Arduino_Assert::assertEqual(byte a, byte b, char *msg) {
-//     return printTestResultWithMsg(assertEqual(a, b), msg);
+// boolean PTW_Arduino_Assert::assertEqual(byte actual, byte expected, char *msg) {
+//     return printTestResultWithMsg(assertEqual(actual, expected), msg);
 // }
 //  char
-boolean PTW_Arduino_Assert::assertEqual(char a, char b) {
+boolean PTW_Arduino_Assert::assertEqualChar(char actual, char expected) {
     numberOfTests++;
-    boolean passed = (a == b);
+    boolean passed = (actual == expected);
     if (passed) {
         numberOfTestsPassed++;
     } else {
@@ -58,13 +65,19 @@ boolean PTW_Arduino_Assert::assertEqual(char a, char b) {
     }
     return passed;
 }
-boolean PTW_Arduino_Assert::assertEqual(char a, char b, char *msg) {
-    return printTestResultWithMsg(assertEqual(a, b), msg);
+boolean PTW_Arduino_Assert::assertEqualChar(char actual, char expected, char *msg) {
+    boolean testPassed = printTestResultWithMsg(assertEqualChar(actual, expected), msg)
+
+    if (failVerbosity) {
+        printVerboseFailMessageChar(actual,expected);
+    }
+
+    return testPassed;
 }
 //  int
-boolean PTW_Arduino_Assert::assertEqual(int a, int b) {
+boolean PTW_Arduino_Assert::assertEqualInt(int actual, int expected) {
     numberOfTests++;
-    boolean passed = (a == b);
+    boolean passed = (actual == expected);
     if (passed) {
         numberOfTestsPassed++;
     } else {
@@ -72,45 +85,69 @@ boolean PTW_Arduino_Assert::assertEqual(int a, int b) {
     }
     return passed;
 }
-boolean PTW_Arduino_Assert::assertEqual(int a, int b, char *msg) {
-    return printTestResultWithMsg(assertEqual(a, b), msg);
+boolean PTW_Arduino_Assert::assertEqualInt(int actual, int expected, char *msg) {
+    boolean testPassed = printTestResultWithMsg(assertEqualInt(actual, expected), msg)
+
+    if (failVerbosity) {
+        printVerboseFailMessageInt(actual,expected);
+    }
+
+    return testPassed;
 }
 
 // NOT EQUAL
 //  boolean
-boolean PTW_Arduino_Assert::assertNotEqual(boolean a, boolean b) {
-    return !assertEqual(a,b);
+boolean PTW_Arduino_Assert::assertNotEqualBoolean(boolean actual, boolean expected) {
+    return !assertEqualBoolean(actual,expected);
 }
-boolean PTW_Arduino_Assert::assertNotEqual(boolean a, boolean b, char *msg) {
-    return printTestResultWithMsg(assertNotEqual(a, b), msg);
+boolean PTW_Arduino_Assert::assertNotEqualBoolean(boolean actual, boolean expected, char *msg) {
+    boolean testPassed = printTestResultWithMsg(assertNotEqualBoolean(actual, expected), msg);
+
+    if (failVerbosity) {
+        printVerboseFailMessageBoolean(actual,expected);
+    }
+
+    return testPassed;
 }
 //  byte
-// boolean PTW_Arduino_Assert::assertNotEqual(byte a, byte b) {
-//     return !assertEqual(a,b);
+// boolean PTW_Arduino_Assert::assertNotEqual(byte actual, byte expected) {
+//     return !assertEqual(actual,expected);
 // }
-// boolean PTW_Arduino_Assert::assertNotEqual(byte a, byte b, char *msg) {
-//     return printTestResultWithMsg(assertNotEqual(a, b), msg);
+// boolean PTW_Arduino_Assert::assertNotEqual(byte actual, byte expected, char *msg) {
+//     return printTestResultWithMsg(assertNotEqual(actual, expected), msg);
 // }
 //  char
-boolean PTW_Arduino_Assert::assertNotEqual(char a, char b) {
-    return !assertEqual(a,b);
+boolean PTW_Arduino_Assert::assertNotEqualChar(char actual, char expected) {
+    return !assertEqualChar(actual,expected);
 }
-boolean PTW_Arduino_Assert::assertNotEqual(char a, char b, char *msg) {
-    return printTestResultWithMsg(assertNotEqual(a, b), msg);
+boolean PTW_Arduino_Assert::assertNotEqualChar(char actual, char expected, char *msg) {
+    boolean testPassed = printTestResultWithMsg(assertNotEqualChar(actual, expected), msg)
+
+    if (failVerbosity) {
+        printVerboseFailMessageChar(actual,expected);
+    }
+
+    return testPassed;
 }
 //  int
-boolean PTW_Arduino_Assert::assertNotEqual(int a, int b) {
-    return !assertEqual(a,b);
+boolean PTW_Arduino_Assert::assertNotEqualInt(int actual, int expected) {
+    return !assertEqualInt(actual,expected);
 }
-boolean PTW_Arduino_Assert::assertNotEqual(int a, int b, char *msg) {
-    return printTestResultWithMsg(assertNotEqual(a, b), msg);
+boolean PTW_Arduino_Assert::assertNotEqualInt(int actual, int expected, char *msg) {
+    boolean testPassed = printTestResultWithMsg(assertNotEqualInt(actual, expected), msg)
+
+    if (failVerbosity) {
+        printVerboseFailMessageInt(actual,expected);
+    }
+
+    return testPassed;
 }
 
 // GREATER THAN
 //  boolean
-boolean PTW_Arduino_Assert::assertGreaterThan(boolean a, boolean b) {
+boolean PTW_Arduino_Assert::assertGreaterThanBoolean(boolean actual, boolean expected) {
     numberOfTests++;
-    boolean passed = (a > b);
+    boolean passed = (actual > expected);
     if (passed) {
         numberOfTestsPassed++;
     } else {
@@ -118,13 +155,19 @@ boolean PTW_Arduino_Assert::assertGreaterThan(boolean a, boolean b) {
     }
     return passed;
 }
-boolean PTW_Arduino_Assert::assertGreaterThan(boolean a, boolean b, char *msg) {
-    return printTestResultWithMsg(assertGreaterThan(a, b), msg);
+boolean PTW_Arduino_Assert::assertGreaterThanBoolean(boolean actual, boolean expected, char *msg) {
+    boolean testPassed = printTestResultWithMsg(assertGreaterThanBoolean(actual, expected), msg)
+
+    if (failVerbosity) {
+        printVerboseFailMessageBoolean(actual,expected);
+    }
+
+    return testPassed;
 }
 //  byte
-// boolean PTW_Arduino_Assert::assertGreaterThan(byte a, byte b) {
+// boolean PTW_Arduino_Assert::assertGreaterThan(byte actual, byte expected) {
 //     numberOfTests++;
-//     boolean passed = (a > b);
+//     boolean passed = (actual > expected);
 //     if (passed) {
 //         numberOfTestsPassed++;
 //     } else {
@@ -132,13 +175,13 @@ boolean PTW_Arduino_Assert::assertGreaterThan(boolean a, boolean b, char *msg) {
 //     }
 //     return passed;
 // }
-// boolean PTW_Arduino_Assert::assertGreaterThan(byte a, byte b, char *msg) {
-//     return printTestResultWithMsg(assertGreaterThan(a, b), msg);
+// boolean PTW_Arduino_Assert::assertGreaterThan(byte actual, byte expected, char *msg) {
+//     return printTestResultWithMsg(assertGreaterThan(actual, expected), msg);
 // }
 //  char
-boolean PTW_Arduino_Assert::assertGreaterThan(char a, char b) {
+boolean PTW_Arduino_Assert::assertGreaterThan(char actual, char expected) {
     numberOfTests++;
-    boolean passed = (a > b);
+    boolean passed = (actual > expected);
     if (passed) {
         numberOfTestsPassed++;
     } else {
@@ -146,13 +189,19 @@ boolean PTW_Arduino_Assert::assertGreaterThan(char a, char b) {
     }
     return passed;
 }
-boolean PTW_Arduino_Assert::assertGreaterThan(char a, char b, char *msg) {
-    return printTestResultWithMsg(assertGreaterThan(a, b), msg);
+boolean PTW_Arduino_Assert::assertGreaterThan(char actual, char expected, char *msg) {
+    boolean testPassed = printTestResultWithMsg(assertGreaterThan(actual, expected), msg)
+
+    if (failVerbosity) {
+        printVerboseFailMessageChar(actual,expected);
+    }
+
+    return testPassed;
 }
 //  int
-boolean PTW_Arduino_Assert::assertGreaterThan(int a, int b) {
+boolean PTW_Arduino_Assert::assertGreaterThanInt(int actual, int expected) {
     numberOfTests++;
-    boolean passed = (a > b);
+    boolean passed = (actual > expected);
     if (passed) {
         numberOfTestsPassed++;
     } else {
@@ -160,15 +209,21 @@ boolean PTW_Arduino_Assert::assertGreaterThan(int a, int b) {
     }
     return passed;
 }
-boolean PTW_Arduino_Assert::assertGreaterThan(int a, int b, char *msg) {
-    return printTestResultWithMsg(assertGreaterThan(a, b), msg);
+boolean PTW_Arduino_Assert::assertGreaterThanInt(int actual, int expected, char *msg) {
+    boolean testPassed = printTestResultWithMsg(assertGreaterThanInt(actual, expected), msg)
+
+    if (failVerbosity) {
+        printVerboseFailMessageInt(actual,expected);
+    }
+
+    return testPassed;
 }
 
 // LESS THAN
 //  boolean
-boolean PTW_Arduino_Assert::assertLessThan(boolean a, boolean b) {
+boolean PTW_Arduino_Assert::assertLessThanBoolean(boolean actual, boolean expected) {
     numberOfTests++;
-    boolean passed = (a < b);
+    boolean passed = (actual < expected);
     if (passed) {
         numberOfTestsPassed++;
     } else {
@@ -176,13 +231,19 @@ boolean PTW_Arduino_Assert::assertLessThan(boolean a, boolean b) {
     }
     return passed;
 }
-boolean PTW_Arduino_Assert::assertLessThan(boolean a, boolean b, char *msg) {
-    return printTestResultWithMsg(assertLessThan(a, b), msg);
+boolean PTW_Arduino_Assert::assertLessThanBoolean(boolean actual, boolean expected, char *msg) {
+    boolean testPassed = printTestResultWithMsg(assertLessThanBoolean(actual, expected), msg)
+
+    if (failVerbosity) {
+        printVerboseFailMessageBoolean(actual,expected);
+    }
+
+    return testPassed;
 }
 //  byte
-// boolean PTW_Arduino_Assert::assertLessThan(byte a, byte b) {
+// boolean PTW_Arduino_Assert::assertLessThan(byte actual, byte expected) {
 //     numberOfTests++;
-//     boolean passed = (a < b);
+//     boolean passed = (actual < expected);
 //     if (passed) {
 //         numberOfTestsPassed++;
 //     } else {
@@ -190,13 +251,13 @@ boolean PTW_Arduino_Assert::assertLessThan(boolean a, boolean b, char *msg) {
 //     }
 //     return passed;
 // }
-// boolean PTW_Arduino_Assert::assertLessThan(byte a, byte b, char *msg) {
-//     return printTestResultWithMsg(assertLessThan(a, b), msg);
+// boolean PTW_Arduino_Assert::assertLessThan(byte actual, byte expected, char *msg) {
+//     return printTestResultWithMsg(assertLessThan(actual, expected), msg);
 // }
 //  char
-boolean PTW_Arduino_Assert::assertLessThan(char a, char b) {
+boolean PTW_Arduino_Assert::assertLessThanChar(char actual, char expected) {
     numberOfTests++;
-    boolean passed = (a < b);
+    boolean passed = (actual < expected);
     if (passed) {
         numberOfTestsPassed++;
     } else {
@@ -204,13 +265,19 @@ boolean PTW_Arduino_Assert::assertLessThan(char a, char b) {
     }
     return passed;
 }
-boolean PTW_Arduino_Assert::assertLessThan(char a, char b, char *msg) {
-    return printTestResultWithMsg(assertLessThan(a, b), msg);
+boolean PTW_Arduino_Assert::assertLessThanChar(char actual, char expected, char *msg) {
+    boolean testPassed = printTestResultWithMsg(assertLessThanChar(actual, expected), msg)
+
+    if (failVerbosity) {
+        printVerboseFailMessageChar(actual,expected);
+    }
+
+    return testPassed;
 }
 //  int
-boolean PTW_Arduino_Assert::assertLessThan(int a, int b) {
+boolean PTW_Arduino_Assert::assertLessThanInt(int actual, int expected) {
     numberOfTests++;
-    boolean passed = (a < b);
+    boolean passed = (actual < expected);
     if (passed) {
         numberOfTestsPassed++;
     } else {
@@ -218,8 +285,14 @@ boolean PTW_Arduino_Assert::assertLessThan(int a, int b) {
     }
     return passed;
 }
-boolean PTW_Arduino_Assert::assertLessThan(int a, int b, char *msg) {
-    return printTestResultWithMsg(assertLessThan(a, b), msg);
+boolean PTW_Arduino_Assert::assertLessThanInt(int actual, int expected, char *msg) {
+    boolean testPassed = printTestResultWithMsg(assertLessThanInt(actual, expected), msg)
+
+    if (failVerbosity) {
+        printVerboseFailMessageInt(actual,expected);
+    }
+
+    return testPassed;
 }
 
 void PTW_Arduino_Assert::begin(void) {
@@ -306,6 +379,33 @@ void PTW_Arduino_Assert::end(void) {
 /***************************************************/
 /** PRIVATE METHODS ********************************/
 /***************************************************/
+
+void PTW_Arduino_Assert::printVerboseFailMessageBoolean(boolean actual, boolean expected) {
+    if (_hardwareSerial) {
+        if (expected) {
+            _hardwareSerial->.print("      Expected - true");
+            _hardwareSerial->.print("      Actual   - false");
+        } else {
+            _hardwareSerial->.print("      Expected - false");
+            _hardwareSerial->.print("      Actual   - true");
+        }
+    }
+}
+
+void PTW_Arduino_Assert::printVerboseFailMessageChar(char actual, char expected) {
+    if (_hardwareSerial) {
+        _hardwareSerial->.print("      Expected - "); _hardwareSerial->println(expected);
+        _hardwareSerial->.print("      Actual   - "); _hardwareSerial->println(actual);
+    }
+}
+
+void PTW_Arduino_Assert::printVerboseFailMessageInt(int actual, int expected) {
+    if (_hardwareSerial) {
+        _hardwareSerial->.print("      Expected - "); _hardwareSerial->println(expected);
+        _hardwareSerial->.print("      Actual   - "); _hardwareSerial->println(actual);
+    }
+}
+
 
 boolean PTW_Arduino_Assert::printTestResultWithMsg(boolean testPassed, char *msg) {
     if (_hardwareSerial) {

@@ -20,54 +20,63 @@
 #define SERIAL_SOFTWARE 1
 #define SERIAL_USB 2
 
+#define VERBOSE_NONE 0
+#define VERBOSE_MAX 1
+
 class PTW_Arduino_Assert {
 
 public:
     PTW_Arduino_Assert();
     // EQUAL
-    boolean assertEqual(boolean a, boolean b);
-    boolean assertEqual(boolean a, boolean b, char *msg);
-    // boolean assertEqual(byte a, byte b);
-    // boolean assertEqual(byte a, byte b, char *msg);
-    boolean assertEqual(char a, char b);
-    boolean assertEqual(char a, char b, char *msg);
-    boolean assertEqual(int a, int b);
-    boolean assertEqual(int a, int b, char *msg);
+    boolean assertEqualBoolean(boolean actual, boolean expected);
+    boolean assertEqualBoolean(boolean actual, boolean expected, char *msg);
+    // boolean assertEqual(byte actual, byte expected);
+    // boolean assertEqual(byte actual, byte expected, char *msg);
+    boolean assertEqualChar(char actual, char expected);
+    boolean assertEqualChar(char actual, char expected, char *msg);
+    boolean assertEqualInt(int actual, int expected);
+    boolean assertEqualInt(int actual, int expected, char *msg);
     // NOT EQUAL
-    boolean assertNotEqual(boolean a, boolean b);
-    boolean assertNotEqual(boolean a, boolean b, char *msg);
-    // boolean assertNotEqual(byte a, byte b);
-    // boolean assertNotEqual(byte a, byte b, char *msg);
-    boolean assertNotEqual(char a, char b);
-    boolean assertNotEqual(char a, char b, char *msg);
-    boolean assertNotEqual(int a, int b);
-    boolean assertNotEqual(int a, int b, char *msg);
+    boolean assertNotEqualBoolean(boolean actual, boolean expected);
+    boolean assertNotEqualBoolean(boolean actual, boolean expected, char *msg);
+    // boolean assertNotEqual(byte actual, byte expected);
+    // boolean assertNotEqual(byte actual, byte expected, char *msg);
+    boolean assertNotEqualChar(char actual, char expected);
+    boolean assertNotEqualChar(char actual, char expected, char *msg);
+    boolean assertNotEqualInt(int actual, int expected);
+    boolean assertNotEqualInt(int actual, int expected, char *msg);
     // GREATER THAN
-    boolean assertGreaterThan(boolean a, boolean b);
-    boolean assertGreaterThan(boolean a, boolean b, char *msg);
-    // boolean assertGreaterThan(byte a, byte b);
-    // boolean assertGreaterThan(byte a, byte b, char *msg);
-    boolean assertGreaterThan(char a, char b);
-    boolean assertGreaterThan(char a, char b, char *msg);
-    boolean assertGreaterThan(int a, int b);
-    boolean assertGreaterThan(int a, int b, char *msg);
+    boolean assertGreaterThanBoolean(boolean actual, boolean expected);
+    boolean assertGreaterThanBoolean(boolean actual, boolean expected, char *msg);
+    // boolean assertGreaterThan(byte actual, byte expected);
+    // boolean assertGreaterThan(byte actual, byte expected, char *msg);
+    boolean assertGreaterThanChar(char actual, char expected);
+    boolean assertGreaterThanChar(char actual, char expected, char *msg);
+    boolean assertGreaterThanInt(int actual, int expected);
+    boolean assertGreaterThanInt(int actual, int expected, char *msg);
     // LESS THAN
-    boolean assertLessThan(boolean a, boolean b);
-    boolean assertLessThan(boolean a, boolean b, char *msg);
-    // boolean assertLessThan(byte a, byte b);
-    // boolean assertLessThan(byte a, byte b, char *msg);
-    boolean assertLessThan(char a, char b);
-    boolean assertLessThan(char a, char b, char *msg);
-    boolean assertLessThan(int a, int b);
-    boolean assertLessThan(int a, int b, char *msg);
+    boolean assertLessThanBoolean(boolean actual, boolean expected);
+    boolean assertLessThanBoolean(boolean actual, boolean expected, char *msg);
+    // boolean assertLessThan(byte actual, byte expected);
+    // boolean assertLessThan(byte actual, byte expected, char *msg);
+    boolean assertLessThanChar(char actual, char expected);
+    boolean assertLessThanChar(char actual, char expected, char *msg);
+    boolean assertLessThanInt(int actual, int expected);
+    boolean assertLessThanInt(int actual, int expected, char *msg);
 
     void begin(void);
     void end(void);
     void describe(char *title);
 
+    void printVerboseFailMessageBoolean(boolean actual, boolean expected);
+    void printVerboseFailMessageChar(char actual, char expected);
+    void printVerboseFailMessageInt(int actual, int expected);
+
     // void setSerial(USBSerial &serial);
     void setSerial(HardwareSerial &serial);
     // void setSerial(SoftwareSerial *serial);
+
+    byte failVerbosity;
 
 private:
     HardwareSerial *_hardwareSerial;
