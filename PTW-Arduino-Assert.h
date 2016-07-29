@@ -30,8 +30,8 @@ public:
     // EQUAL
     boolean assertEqualBoolean(boolean actual, boolean expected);
     boolean assertEqualBoolean(boolean actual, boolean expected, char *msg);
-    // boolean assertEqual(byte actual, byte expected);
-    // boolean assertEqual(byte actual, byte expected, char *msg);
+    boolean assertEqualByte(byte actual, byte expected);
+    boolean assertEqualByte(byte actual, byte expected, char *msg);
     boolean assertEqualChar(char actual, char expected);
     boolean assertEqualChar(char actual, char expected, char *msg);
     boolean assertEqualInt(int actual, int expected);
@@ -39,8 +39,8 @@ public:
     // NOT EQUAL
     boolean assertNotEqualBoolean(boolean actual, boolean expected);
     boolean assertNotEqualBoolean(boolean actual, boolean expected, char *msg);
-    // boolean assertNotEqual(byte actual, byte expected);
-    // boolean assertNotEqual(byte actual, byte expected, char *msg);
+    boolean assertNotEqualByte(byte actual, byte expected);
+    boolean assertNotEqualByte(byte actual, byte expected, char *msg);
     boolean assertNotEqualChar(char actual, char expected);
     boolean assertNotEqualChar(char actual, char expected, char *msg);
     boolean assertNotEqualInt(int actual, int expected);
@@ -48,8 +48,8 @@ public:
     // GREATER THAN
     boolean assertGreaterThanBoolean(boolean actual, boolean expected);
     boolean assertGreaterThanBoolean(boolean actual, boolean expected, char *msg);
-    // boolean assertGreaterThan(byte actual, byte expected);
-    // boolean assertGreaterThan(byte actual, byte expected, char *msg);
+    boolean assertGreaterThanByte(byte actual, byte expected);
+    boolean assertGreaterThanByte(byte actual, byte expected, char *msg);
     boolean assertGreaterThanChar(char actual, char expected);
     boolean assertGreaterThanChar(char actual, char expected, char *msg);
     boolean assertGreaterThanInt(int actual, int expected);
@@ -57,8 +57,8 @@ public:
     // LESS THAN
     boolean assertLessThanBoolean(boolean actual, boolean expected);
     boolean assertLessThanBoolean(boolean actual, boolean expected, char *msg);
-    // boolean assertLessThan(byte actual, byte expected);
-    // boolean assertLessThan(byte actual, byte expected, char *msg);
+    boolean assertLessThanByte(byte actual, byte expected);
+    boolean assertLessThanByte(byte actual, byte expected, char *msg);
     boolean assertLessThanChar(char actual, char expected);
     boolean assertLessThanChar(char actual, char expected, char *msg);
     boolean assertLessThanInt(int actual, int expected);
@@ -69,6 +69,7 @@ public:
     void describe(char *title);
 
     void printVerboseFailMessageBoolean(boolean actual, boolean expected);
+    void printVerboseFailMessageByte(byte actual, byte expected);
     void printVerboseFailMessageChar(char actual, char expected);
     void printVerboseFailMessageInt(int actual, int expected);
 
