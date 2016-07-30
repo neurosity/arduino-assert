@@ -342,7 +342,7 @@ boolean PTW_Arduino_Assert::assertBufferEqual(char *actual, char *expected, int 
 void PTW_Arduino_Assert::begin(void) {
     if (_hardwareSerial) {
         _hardwareSerial->println("-------------------------------");
-        _hardwareSerial->println("-- PTW-Arduino-Assert v0.1.0 --");
+        _hardwareSerial->println("-- PTW-Arduino-Assert v0.2.0 --");
         _hardwareSerial->println("-------------------------------");
         _hardwareSerial->println("------- AUTO TEST BEGIN -------");
         _hardwareSerial->println("-------------------------------");
