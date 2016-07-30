@@ -67,18 +67,11 @@ public:
     boolean assertLessThanInt(int, int);
     boolean assertLessThanInt(int, int, char *);
 
-
     void begin(void);
     void end(void);
     void describe(char *title);
     void detail(char *);
     void it(char *);
-
-    void printVerboseFailMessageBoolean(boolean, boolean);
-    void printVerboseFailMessageBuffer(char *, char *, int length);
-    void printVerboseFailMessageByte(byte, byte);
-    void printVerboseFailMessageChar(char, char);
-    void printVerboseFailMessageInt(int, int);
 
     // void setSerial(USBSerial &serial);
     void setSerial(HardwareSerial &serial);
@@ -91,9 +84,15 @@ private:
     // SoftwareSerial *_softwareSerial;
 
     // USBSerial *_usbSerial;
-    byte serialType;
     boolean printTestResultWithMsg(boolean, char *msg);
     boolean printTestResultWithMsgAndLine(boolean testPassed, char *msg, int lineNumber);
+    void printVerboseFailMessageBoolean(boolean, boolean);
+    void printVerboseFailMessageBuffer(char *, char *, int length);
+    void printVerboseFailMessageByte(byte, byte);
+    void printVerboseFailMessageChar(char, char);
+    void printVerboseFailMessageInt(int, int);
+
+    byte serialType;
     int numberOfTests;
     int numberOfTestsFailed;
     int numberOfTestsPassed;

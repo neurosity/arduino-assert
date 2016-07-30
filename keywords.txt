@@ -9,14 +9,27 @@
 #######################################
 # Methods and Functions (KEYWORD2)
 #######################################
-assertEqual		           KEYWORD2
-assertNotEqual	           KEYWORD2
-assertGreaterThan	       KEYWORD2
-assertLessThan             KEYWORD2
-begin                      KEYWORD2
-describe                   KEYWORD2
-end                        KEYWORD2
-setSerial                  KEYWORD2
+assertBoolean           KEYWORD2
+assertEqualBuffer       KEYWORD2
+assertEqualByte         KEYWORD2
+assertEqualChar         KEYWORD2
+assertEqualInt          KEYWORD2
+assertNotEqualBuffer    KEYWORD2
+assertNotEqualByte      KEYWORD2
+assertNotEqualChar      KEYWORD2
+assertNotEqualInt       KEYWORD2
+assertGreaterThanByte   KEYWORD2
+assertGreaterThanChar   KEYWORD2
+assertGreaterThanInt    KEYWORD2
+assertLessThanByte      KEYWORD2
+assertLessThanChar      KEYWORD2
+assertLessThanInt       KEYWORD2
+begin                   KEYWORD2
+end                     KEYWORD2
+describe                KEYWORD2
+detail                  KEYWORD2
+it                      KEYWORD2
+setSerial               KEYWORD2
 
 #######################################
 # Constants (LITERAL1)
