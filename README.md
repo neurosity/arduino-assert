@@ -28,6 +28,7 @@ void loop() {
 void go() {
   test.begin();
   testAdd();
+  testBuffer();
   test.end();
 }
 
@@ -38,9 +39,21 @@ void testAdd() {
 }
 
 void testAdd_T1() {
-  test.assertEqual(1+1, 2, "1 should equal 1");
+  test.assertEqualInt(1+1, 2, "1 should equal 1");
 }
 void testAdd_T2() {
-  test.assertNotEqual(1+1, 1, "2 should not equal 1");
+  test.assertNotEqualInt(1+1, 1, "2 should not equal 1");
 }
+
+void testBuffer() {
+    char bufferTaco[] = "taco";
+    char bufferTest[] = "hey_taco";
+
+    int bufferTacoLength = 4;
+
+    test.assertNotEqualBuffer(bufferTaco,bufferTest, bufferTacoLength, "should not find taco buffer in first 4 bytes of test buffer");
+
+    test.assertEqualBuffer(bufferTaco,bufferTest + 4, bufferTacoLength, "should find taco buffer in last 4 bytes of test buffer");
+}
+
 ```

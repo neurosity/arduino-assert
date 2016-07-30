@@ -28,17 +28,24 @@ class PTW_Arduino_Assert {
 public:
     PTW_Arduino_Assert();
     // EQUAL
-    boolean assertEqualBoolean(boolean, boolean);
-    boolean assertEqualBoolean(boolean, boolean, char *);
+    boolean assertBoolean(boolean, boolean);
+    boolean assertBoolean(boolean, boolean, char *);
+    boolean assertBoolean(boolean, boolean, char *, int);
+    boolean assertEqualBuffer(char *, char *, int);
+    boolean assertEqualBuffer(char *, char *, int, char *);
+    boolean assertEqualBuffer(char *, char *, int, char *, int);
     boolean assertEqualByte(byte, byte);
     boolean assertEqualByte(byte, byte, char *);
+    boolean assertEqualByte(byte, byte, char *, int);
     boolean assertEqualChar(char, char);
     boolean assertEqualChar(char, char, char *);
+    boolean assertEqualChar(char, char, char *, int);
     boolean assertEqualInt(int, int);
     boolean assertEqualInt(int, int, char *);
+    boolean assertEqualInt(int, int, char *, int);
     // NOT EQUAL
-    boolean assertNotEqualBoolean(boolean, boolean);
-    boolean assertNotEqualBoolean(boolean, boolean, char *);
+    boolean assertNotEqualBuffer(char *, char *, int);
+    boolean assertNotEqualBuffer(char *, char *, int, char *);
     boolean assertNotEqualByte(byte, byte);
     boolean assertNotEqualByte(byte, byte, char *);
     boolean assertNotEqualChar(char, char);
@@ -46,8 +53,6 @@ public:
     boolean assertNotEqualInt(int, int);
     boolean assertNotEqualInt(int, int, char *);
     // GREATER THAN
-    boolean assertGreaterThanBoolean(boolean, boolean);
-    boolean assertGreaterThanBoolean(boolean, boolean, char *);
     boolean assertGreaterThanByte(byte, byte);
     boolean assertGreaterThanByte(byte, byte, char *);
     boolean assertGreaterThanChar(char, char);
@@ -55,8 +60,6 @@ public:
     boolean assertGreaterThanInt(int, int);
     boolean assertGreaterThanInt(int, int, char *);
     // LESS THAN
-    boolean assertLessThanBoolean(boolean, boolean);
-    boolean assertLessThanBoolean(boolean, boolean, char *);
     boolean assertLessThanByte(byte, byte);
     boolean assertLessThanByte(byte, byte, char *);
     boolean assertLessThanChar(char, char);
@@ -64,13 +67,12 @@ public:
     boolean assertLessThanInt(int, int);
     boolean assertLessThanInt(int, int, char *);
 
-    boolean assertBufferEqual(char *, char *, int);
-    boolean assertBufferEqual(char *, char *, int, char *);
 
     void begin(void);
     void end(void);
     void describe(char *title);
     void detail(char *);
+    void it(char *);
 
     void printVerboseFailMessageBoolean(boolean, boolean);
     void printVerboseFailMessageBuffer(char *, char *, int length);
@@ -91,6 +93,7 @@ private:
     // USBSerial *_usbSerial;
     byte serialType;
     boolean printTestResultWithMsg(boolean, char *msg);
+    boolean printTestResultWithMsgAndLine(boolean testPassed, char *msg, int lineNumber);
     int numberOfTests;
     int numberOfTestsFailed;
     int numberOfTestsPassed;
