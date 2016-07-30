@@ -319,6 +319,26 @@ boolean PTW_Arduino_Assert::assertLessThanInt(int actual, int expected, char *ms
     return testPassed;
 }
 
+boolean PTW_Arduino_Assert::assertBufferEqual(char *actual, char *expected, int length) {
+    boolean pass = true;
+    for (int i = 0; i < length; i++) {
+        if (actual[i] != expected[i]) {
+            pass = false;
+        }
+    }
+    return pass;
+}
+
+boolean PTW_Arduino_Assert::assertBufferEqual(char *actual, char *expected, int length, char *msg) {
+    boolean testPassed = printTestResultWithMsg(assertBufferEqual(actual, expected, length), msg);
+
+    if (failVerbosity && !testPassed) {
+        printVerboseFailMessageBuffer(actual, expected, length);
+    }
+
+    return testPassed;
+}
+
 void PTW_Arduino_Assert::begin(void) {
     if (_hardwareSerial) {
         _hardwareSerial->println("-------------------------------");
@@ -350,6 +370,21 @@ void PTW_Arduino_Assert::describe(char *title) {
     if (_hardwareSerial) {
         _hardwareSerial->print(" #");
         _hardwareSerial->println(title);
+    }
+    // if (_softwareSerial) {
+    //     _softwareSerial.print(" #");
+    //     _softwareSerial.println(msg);
+    // }
+    // if (_usbSerial) {
+    //     _usbSerial->print(" #");
+    //     _usbSerial->println(title);
+    // }
+}
+
+void PTW_Arduino_Assert::detail(char *msg) {
+    if (_hardwareSerial) {
+        _hardwareSerial->print(" ->");
+        _hardwareSerial->println(msg);
     }
     // if (_softwareSerial) {
     //     _softwareSerial.print(" #");
@@ -434,6 +469,17 @@ void PTW_Arduino_Assert::printVerboseFailMessageInt(int actual, int expected) {
     if (_hardwareSerial) {
         _hardwareSerial->print("      Expected - "); _hardwareSerial->println(expected);
         _hardwareSerial->print("      Actual   - "); _hardwareSerial->println(actual);
+    }
+}
+
+
+void PTW_Arduino_Assert::printVerboseFailMessageBuffer(char *actual, char *expected, int length) {
+    for (int i = 0; i < length; i++) {
+        if (_hardwareSerial) {
+            _hardwareSerial->print("     Index: "); _hardwareSerial->println(i);
+            _hardwareSerial->print("      Expected - "); _hardwareSerial->println(expected[i]);
+            _hardwareSerial->print("      Actual   - "); _hardwareSerial->println(actual[i]);
+        }
     }
 }
 
