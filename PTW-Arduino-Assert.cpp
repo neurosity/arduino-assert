@@ -475,8 +475,12 @@ void PTW_Arduino_Assert::printVerboseFailMessageBoolean(boolean actual, boolean 
 
 void PTW_Arduino_Assert::printVerboseFailMessageByte(byte actual, byte expected) {
     if (_hardwareSerial) {
-        _hardwareSerial->print("      Expected - 0b"); _hardwareSerial->println(expected,BIN);
-        _hardwareSerial->print("      Actual   - 0b"); _hardwareSerial->println(actual,BIN);
+        _hardwareSerial->print("      Expected - 0x");
+        if (expected < 0x10) _hardwareSerial->print("0"); // prevents only a nibble being printed
+        _hardwareSerial->println(expected,HEX);
+        _hardwareSerial->print("      Actual   - 0x");
+        if (actual < 0x10) _hardwareSerial->print("0"); // prevents only a nibble being printed
+        _hardwareSerial->println(actual,HEX);
     }
 }
 
