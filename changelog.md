@@ -1,3 +1,8 @@
+# v0.3.2
+
+### Bug Fixes
+* NotEqual functions not adding to totals correctly
+
 # v0.3.0
 
 ### New Features

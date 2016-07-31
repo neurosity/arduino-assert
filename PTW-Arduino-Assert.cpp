@@ -4,7 +4,7 @@
  *  on and maintaing.
  * @author AJ Keller
  * @license MIT
- * @version 0.3.1
+ * @version 0.3.2
  */
 
 #include "PTW-Arduino-Assert.h"
@@ -215,7 +215,14 @@ boolean PTW_Arduino_Assert::assertNotEqualByte(byte actual, byte expected, char 
 }
 //  char
 boolean PTW_Arduino_Assert::assertNotEqualChar(char actual, char expected) {
-    return !assertEqualChar(actual,expected);
+    numberOfTests++;
+    boolean passed = (actual != expected);
+    if (passed) {
+        numberOfTestsPassed++;
+    } else {
+        numberOfTestsFailed++;
+    }
+    return passed;
 }
 boolean PTW_Arduino_Assert::assertNotEqualChar(char actual, char expected, char *msg) {
     boolean testPassed = printTestResultWithMsg(assertNotEqualChar(actual, expected), msg);
@@ -495,21 +502,21 @@ boolean PTW_Arduino_Assert::assertBetweenInclusiveInt(int actual, int lower, int
 void PTW_Arduino_Assert::begin(void) {
     if (_hardwareSerial) {
         _hardwareSerial->println("-------------------------------");
-        _hardwareSerial->println("-- PTW-Arduino-Assert v0.3.1 --");
+        _hardwareSerial->println("-- PTW-Arduino-Assert v0.3.2 --");
         _hardwareSerial->println("-------------------------------");
         _hardwareSerial->println("------- AUTO TEST BEGIN -------");
         _hardwareSerial->println("-------------------------------");
     }
     // if (_softwareSerial) {
     //     _softwareSerial.println("-------------------------------");
-    //     _softwareSerial.println("-- PTW-Arduino-Assert v0.3.1 --");
+    //     _softwareSerial.println("-- PTW-Arduino-Assert v0.3.2 --");
     //     _softwareSerial.println("-------------------------------");
     //     _softwareSerial.println("------- AUTO TEST BEGIN -------");
     //     _softwareSerial.println("-------------------------------");
     // }
     // if (_usbSerial) {
     //     _usbSerial->println("-------------------------------");
-    //     _usbSerial->println("-- PTW-Arduino-Assert v0.3.1 --");
+    //     _usbSerial->println("-- PTW-Arduino-Assert v0.3.2 --");
     //     _usbSerial->println("-------------------------------");
     //     _usbSerial->println("------- AUTO TEST BEGIN -------");
     //     _usbSerial->println("-------------------------------");
