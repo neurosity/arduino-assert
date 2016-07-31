@@ -46,26 +46,43 @@ public:
     // NOT EQUAL
     boolean assertNotEqualBuffer(char *, char *, int);
     boolean assertNotEqualBuffer(char *, char *, int, char *);
+    boolean assertNotEqualBuffer(char *, char *, int, char *, int);
     boolean assertNotEqualByte(byte, byte);
     boolean assertNotEqualByte(byte, byte, char *);
+    boolean assertNotEqualByte(byte, byte, char *, int);
     boolean assertNotEqualChar(char, char);
     boolean assertNotEqualChar(char, char, char *);
+    boolean assertNotEqualChar(char, char, char *, int);
     boolean assertNotEqualInt(int, int);
     boolean assertNotEqualInt(int, int, char *);
+    boolean assertNotEqualInt(int, int, char *, int);
     // GREATER THAN
     boolean assertGreaterThanByte(byte, byte);
     boolean assertGreaterThanByte(byte, byte, char *);
+    boolean assertGreaterThanByte(byte, byte, char *, int);
     boolean assertGreaterThanChar(char, char);
     boolean assertGreaterThanChar(char, char, char *);
+    boolean assertGreaterThanChar(char, char, char *, int);
     boolean assertGreaterThanInt(int, int);
     boolean assertGreaterThanInt(int, int, char *);
+    boolean assertGreaterThanInt(int, int, char *, int);
     // LESS THAN
     boolean assertLessThanByte(byte, byte);
     boolean assertLessThanByte(byte, byte, char *);
+    boolean assertLessThanByte(byte, byte, char *, int);
     boolean assertLessThanChar(char, char);
     boolean assertLessThanChar(char, char, char *);
+    boolean assertLessThanChar(char, char, char *, int);
     boolean assertLessThanInt(int, int);
     boolean assertLessThanInt(int, int, char *);
+    boolean assertLessThanInt(int, int, char *, int);
+    // Between
+    boolean assertBetweenInt(int, int, int);
+    boolean assertBetweenInt(int, int, int, char *);
+    boolean assertBetweenInt(int, int, int, char *, int);
+    boolean assertBetweenInclusiveInt(int, int, int);
+    boolean assertBetweenInclusiveInt(int, int, int, char *);
+    boolean assertBetweenInclusiveInt(int, int, int, char *, int);
 
     void begin(void);
     void end(void);
@@ -91,6 +108,8 @@ private:
     void printVerboseFailMessageByte(byte, byte);
     void printVerboseFailMessageChar(char, char);
     void printVerboseFailMessageInt(int, int);
+    void printVerboseFailMessageIntBetween(int actual, int lower, int upper);
+    void printVerboseFailMessageIntBetweenInclusive(int actual, int lower, int upper);
 
     byte serialType;
     int numberOfTests;
