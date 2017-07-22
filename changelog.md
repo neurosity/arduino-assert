@@ -1,3 +1,11 @@
+# v1.0.0
+
+Now on the Arduino library manager.
+
+### New functions
+
+* Add `assertEqualString`
+
 # v0.3.2
 
 ### Bug Fixes

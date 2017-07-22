@@ -34,6 +34,8 @@ public:
     boolean assertEqualBuffer(char *, char *, int);
     boolean assertEqualBuffer(char *, char *, int, char *);
     boolean assertEqualBuffer(char *, char *, int, char *, int);
+    boolean assertEqualString(String, String);
+    boolean assertEqualString(String, String, char *);
     boolean assertEqualByte(byte, byte);
     boolean assertEqualByte(byte, byte, char *);
     boolean assertEqualByte(byte, byte, char *, int);
@@ -101,15 +103,16 @@ private:
     // SoftwareSerial *_softwareSerial;
 
     // USBSerial *_usbSerial;
-    boolean printTestResultWithMsg(boolean, char *msg);
-    boolean printTestResultWithMsgAndLine(boolean testPassed, char *msg, int lineNumber);
+    boolean printTestResultWithMsg(boolean, char *);
+    boolean printTestResultWithMsgAndLine(boolean, char *, int);
     void printVerboseFailMessageBoolean(boolean, boolean);
-    void printVerboseFailMessageBuffer(char *, char *, int length);
+    void printVerboseFailMessageBuffer(char *, char *, int);
     void printVerboseFailMessageByte(byte, byte);
     void printVerboseFailMessageChar(char, char);
     void printVerboseFailMessageInt(int, int);
-    void printVerboseFailMessageIntBetween(int actual, int lower, int upper);
-    void printVerboseFailMessageIntBetweenInclusive(int actual, int lower, int upper);
+    void printVerboseFailMessageIntBetween(int, int, int);
+    void printVerboseFailMessageIntBetweenInclusive(int, int, int);
+    void printVerboseFailMessageString(String, String);
 
     byte serialType;
     int numberOfTests;

@@ -61,6 +61,27 @@ boolean PTW_Arduino_Assert::assertEqualBuffer(char *actual, char *expected, int 
     return pass;
 }
 
+boolean PTW_Arduino_Assert::assertEqualString(String actual, String expected) {
+  numberOfTests++;
+  boolean passed = actual.equals(expected);
+  if (passed) {
+      numberOfTestsPassed++;
+  } else {
+      numberOfTestsFailed++;
+  }
+  return passed;
+}
+
+boolean PTW_Arduino_Assert::assertEqualString(String actual, String expected, char *msg) {
+  boolean testPassed = printTestResultWithMsg(assertEqualString(actual, expected), msg);
+
+  if (failVerbosity && !testPassed) {
+      printVerboseFailMessageString(actual, expected);
+  }
+
+  return testPassed;
+}
+
 boolean PTW_Arduino_Assert::assertEqualBuffer(char *actual, char *expected, int length, char *msg) {
     boolean testPassed = printTestResultWithMsg(assertEqualBuffer(actual, expected, length), msg);
 
@@ -502,7 +523,7 @@ boolean PTW_Arduino_Assert::assertBetweenInclusiveInt(int actual, int lower, int
 void PTW_Arduino_Assert::begin(void) {
     if (_hardwareSerial) {
         _hardwareSerial->println("-------------------------------");
-        _hardwareSerial->println("-- PTW-Arduino-Assert v0.3.2 --");
+        _hardwareSerial->println("-- PTW-Arduino-Assert v1.0.0 --");
         _hardwareSerial->println("-------------------------------");
         _hardwareSerial->println("------- AUTO TEST BEGIN -------");
         _hardwareSerial->println("-------------------------------");
@@ -675,6 +696,12 @@ void PTW_Arduino_Assert::printVerboseFailMessageBuffer(char *actual, char *expec
     }
 }
 
+void PTW_Arduino_Assert::printVerboseFailMessageString(String actual, String expected) {
+  if (_hardwareSerial) {
+    _hardwareSerial->print("      Expected - "); _hardwareSerial->println(expected);
+    _hardwareSerial->print("      Actual   - "); _hardwareSerial->println(actual);
+  }
+}
 
 boolean PTW_Arduino_Assert::printTestResultWithMsg(boolean testPassed, char *msg) {
     if (_hardwareSerial) {
