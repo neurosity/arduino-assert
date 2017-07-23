@@ -27,10 +27,17 @@ class PTW_Arduino_Assert {
 
 public:
     PTW_Arduino_Assert();
+    // FLOATS
+    boolean assertApproximately(float, float, float);
+    boolean assertApproximately(float, float, float, char *);
+    boolean assertApproximately(double, double, double);
+    boolean assertApproximately(double, double, double, char *);
     // EQUAL
     boolean assertBoolean(boolean, boolean);
     boolean assertBoolean(boolean, boolean, char *);
     boolean assertBoolean(boolean, boolean, char *, int);
+    boolean assertEqual(unsigned long long, unsigned long long);
+    boolean assertEqual(unsigned long long, unsigned long long, char *);
     boolean assertEqualBuffer(char *, char *, int);
     boolean assertEqualBuffer(char *, char *, int, char *);
     boolean assertEqualBuffer(char *, char *, int, char *, int);
@@ -100,19 +107,21 @@ public:
 
 private:
     HardwareSerial *_hardwareSerial;
-    // SoftwareSerial *_softwareSerial;
 
-    // USBSerial *_usbSerial;
+    void printLLNumber(unsigned long long, uint8_t);
     boolean printTestResultWithMsg(boolean, char *);
     boolean printTestResultWithMsgAndLine(boolean, char *, int);
-    void printVerboseFailMessageBoolean(boolean, boolean);
+    void printVerboseFailMessage(boolean, boolean);
+    void printVerboseFailMessage(char, char);
+    void printVerboseFailMessage(double, double);
+    void printVerboseFailMessage(float, float);
+    void printVerboseFailMessage(int, int);
+    void printVerboseFailMessage(String, String);
+    void printVerboseFailMessage(unsigned long long, unsigned long long);
+    void printVerboseFailMessageHex(uint8_t, uint8_t);
     void printVerboseFailMessageBuffer(char *, char *, int);
-    void printVerboseFailMessageByte(byte, byte);
-    void printVerboseFailMessageChar(char, char);
-    void printVerboseFailMessageInt(int, int);
     void printVerboseFailMessageIntBetween(int, int, int);
     void printVerboseFailMessageIntBetweenInclusive(int, int, int);
-    void printVerboseFailMessageString(String, String);
 
     byte serialType;
     int numberOfTests;
