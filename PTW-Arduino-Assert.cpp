@@ -549,7 +549,14 @@ boolean PTW_Arduino_Assert::assertNotEqual(char actual, char expected, const cha
 }
 //  int
 boolean PTW_Arduino_Assert::assertNotEqual(int actual, int expected) {
-  return !assertEqual(actual, expected);
+  numberOfTests++;
+  boolean passed = (actual != expected);
+  if (passed) {
+    numberOfTestsPassed++;
+  } else {
+    numberOfTestsFailed++;
+  }
+  return passed;
 }
 boolean PTW_Arduino_Assert::assertNotEqual(int actual, int expected, const char *msg) {
   boolean testPassed = printTestResultWithMsg(assertNotEqual(actual, expected), msg);
@@ -571,7 +578,14 @@ boolean PTW_Arduino_Assert::assertNotEqual(int actual, int expected, const char 
 }
 //  long
 boolean PTW_Arduino_Assert::assertNotEqual(long actual, long expected) {
-  return !assertEqual(actual, expected);
+  numberOfTests++;
+  boolean passed = (actual != expected);
+  if (passed) {
+    numberOfTestsPassed++;
+  } else {
+    numberOfTestsFailed++;
+  }
+  return passed;
 }
 boolean PTW_Arduino_Assert::assertNotEqual(long actual, long expected, const char *msg) {
   boolean testPassed = printTestResultWithMsg(assertNotEqual(actual, expected), msg);
@@ -593,7 +607,14 @@ boolean PTW_Arduino_Assert::assertNotEqual(long actual, long expected, const cha
 }
 //  long long
 boolean PTW_Arduino_Assert::assertNotEqual(long long actual, long long expected) {
-  return !assertEqual(actual, expected);
+  numberOfTests++;
+  boolean passed = (actual != expected);
+  if (passed) {
+    numberOfTestsPassed++;
+  } else {
+    numberOfTestsFailed++;
+  }
+  return passed;
 }
 boolean PTW_Arduino_Assert::assertNotEqual(long long actual, long long expected, const char *msg) {
   boolean testPassed = printTestResultWithMsg(assertNotEqual(actual, expected), msg);
@@ -615,7 +636,14 @@ boolean PTW_Arduino_Assert::assertNotEqual(long long actual, long long expected,
 }
 //  size_t
 boolean PTW_Arduino_Assert::assertNotEqual(size_t actual, size_t expected) {
-  return !assertEqual(actual, expected);
+  numberOfTests++;
+  boolean passed = (actual != expected);
+  if (passed) {
+    numberOfTestsPassed++;
+  } else {
+    numberOfTestsFailed++;
+  }
+  return passed;
 }
 boolean PTW_Arduino_Assert::assertNotEqual(size_t actual, size_t expected, const char *msg) {
   boolean testPassed = printTestResultWithMsg(assertNotEqual(actual, expected), msg);
@@ -637,7 +665,14 @@ boolean PTW_Arduino_Assert::assertNotEqual(size_t actual, size_t expected, const
 }
 //  unsigned long
 boolean PTW_Arduino_Assert::assertNotEqual(unsigned long actual, unsigned long expected) {
-  return !assertEqual(actual, expected);
+  numberOfTests++;
+  boolean passed = (actual != expected);
+  if (passed) {
+    numberOfTestsPassed++;
+  } else {
+    numberOfTestsFailed++;
+  }
+  return passed;
 }
 boolean PTW_Arduino_Assert::assertNotEqual(unsigned long actual, unsigned long expected, const char *msg) {
   boolean testPassed = printTestResultWithMsg(assertNotEqual(actual, expected), msg);
@@ -659,7 +694,14 @@ boolean PTW_Arduino_Assert::assertNotEqual(unsigned long actual, unsigned long e
 }
 //  unsigned long long
 boolean PTW_Arduino_Assert::assertNotEqual(unsigned long long actual, unsigned long long expected) {
-  return !assertEqual(actual, expected);
+  numberOfTests++;
+  boolean passed = (actual != expected);
+  if (passed) {
+    numberOfTestsPassed++;
+  } else {
+    numberOfTestsFailed++;
+  }
+  return passed;
 }
 boolean PTW_Arduino_Assert::assertNotEqual(unsigned long long actual, unsigned long long expected, const char *msg) {
   boolean testPassed = printTestResultWithMsg(assertNotEqual(actual, expected), msg);
@@ -1427,7 +1469,7 @@ void PTW_Arduino_Assert::printVerboseFailMessage(String actual, String expected)
 boolean PTW_Arduino_Assert::printTestResultWithMsg(boolean testPassed, const char *msg) {
   if (_hardwareSerial) {
     if (!testPassed) {
-      _hardwareSerial->print(" ** Failed - ");
+      _hardwareSerial->print("  Failed: ");
     } else {
       _hardwareSerial->print("   Passed - ");
     }
@@ -1441,7 +1483,7 @@ boolean PTW_Arduino_Assert::printTestResultWithMsgAndLine(boolean testPassed, co
   if (_hardwareSerial) {
     if (!testPassed) {
       // ** Failed - should...
-      _hardwareSerial->print(" ** Failed - ");
+      _hardwareSerial->print("  Failed: ");
       _hardwareSerial->println(msg);
       // (line: 380)
       _hardwareSerial->print("    line: ");
