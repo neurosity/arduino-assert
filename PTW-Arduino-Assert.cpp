@@ -179,17 +179,7 @@ boolean PTW_Arduino_Assert::assertTrue(boolean isTrue, const char *msg, int line
 
   return testPassed;
 }
-// buffer
-boolean PTW_Arduino_Assert::assertEqualBuffer(char *actual, char *expected, int length) {
-  boolean pass = true;
-  for (int i = 0; i < length; i++) {
-    if (actual[i] != expected[i]) {
-      pass = false;
-    }
-  }
-  return pass;
-}
-
+// STRING
 boolean PTW_Arduino_Assert::assertEqual(String actual, String expected) {
   numberOfTests++;
   boolean passed = actual.equals(expected);
@@ -220,7 +210,22 @@ boolean PTW_Arduino_Assert::assertEqual(String actual, String expected, const ch
 
   return testPassed;
 }
-
+// char buffer
+boolean PTW_Arduino_Assert::assertEqualBuffer(char *actual, char *expected, int length) {
+  numberOfTests++;
+  boolean passed = true;
+  for (int i = 0; i < length; i++) {
+    if (actual[i] != expected[i]) {
+      passed = false;
+    }
+  }
+  if (passed) {
+    numberOfTestsPassed++;
+  } else {
+    numberOfTestsFailed++;
+  }
+  return passed;
+}
 boolean PTW_Arduino_Assert::assertEqualBuffer(char *actual, char *expected, int length, const char *msg) {
   boolean testPassed = printTestResultWithMsg(assertEqualBuffer(actual, expected, length), msg);
 
@@ -231,6 +236,40 @@ boolean PTW_Arduino_Assert::assertEqualBuffer(char *actual, char *expected, int 
   return testPassed;
 }
 boolean PTW_Arduino_Assert::assertEqualBuffer(char *actual, char *expected, int length, const char *msg, int lineNumber) {
+  boolean testPassed = printTestResultWithMsgAndLine(assertEqualBuffer(actual, expected, length), msg, lineNumber);
+
+  if (failVerbosity && !testPassed) {
+    printVerboseFailMessageBuffer(actual, expected, length);
+  }
+
+  return testPassed;
+}
+// uint8_t buffer
+boolean PTW_Arduino_Assert::assertEqualBuffer(uint8_t *actual, uint8_t *expected, int length) {
+  boolean passed = true;
+  numberOfTests++;
+  for (int i = 0; i < length; i++) {
+    if (actual[i] != expected[i]) {
+      passed = false;
+    }
+  }
+  if (passed) {
+    numberOfTestsPassed++;
+  } else {
+    numberOfTestsFailed++;
+  }
+  return passed;
+}
+boolean PTW_Arduino_Assert::assertEqualBuffer(uint8_t *actual, uint8_t *expected, int length, const char *msg) {
+  boolean testPassed = printTestResultWithMsg(assertEqualBuffer(actual, expected, length), msg);
+
+  if (failVerbosity && !testPassed) {
+    printVerboseFailMessageBuffer(actual, expected, length);
+  }
+
+  return testPassed;
+}
+boolean PTW_Arduino_Assert::assertEqualBuffer(uint8_t *actual, uint8_t *expected, int length, const char *msg, int lineNumber) {
   boolean testPassed = printTestResultWithMsgAndLine(assertEqualBuffer(actual, expected, length), msg, lineNumber);
 
   if (failVerbosity && !testPassed) {
@@ -1459,6 +1498,16 @@ void PTW_Arduino_Assert::printVerboseFailMessageBuffer(char *actual, char *expec
   }
 }
 
+void PTW_Arduino_Assert::printVerboseFailMessageBuffer(uint8_t *actual, uint8_t *expected, int length) {
+  for (int i = 0; i < length; i++) {
+    if (_hardwareSerial) {
+      _hardwareSerial->print("     Index: "); _hardwareSerial->println(i);
+      _hardwareSerial->print("      Expected:  "); perfectPrintByteHex(expected[i]); Serial.println();
+      _hardwareSerial->print("      Actual:    "); perfectPrintByteHex(actual[i]); Serial.println();
+    }
+  }
+}
+
 void PTW_Arduino_Assert::printVerboseFailMessage(String actual, String expected) {
   if (_hardwareSerial) {
     _hardwareSerial->print("      Expected:  "); _hardwareSerial->println(expected);
@@ -1514,6 +1563,15 @@ void PTW_Arduino_Assert::printLLNumber(unsigned long long n, uint8_t base) {
     Serial.print((char) (buf[i - 1] < 10 ?
       '0' + buf[i - 1] :
       'A' + buf[i - 1] - 10));
+}
+
+void PTW_Arduino_Assert::perfectPrintByteHex(uint8_t b) {
+  if (b <= 0x0F) {
+    _hardwareSerial->print("0");
+    _hardwareSerial->print(b, HEX);
+  } else {
+    _hardwareSerial->print(b, HEX);
+  }
 }
 
 void PTW_Arduino_Assert::setSerial(HardwareSerial &serial) {

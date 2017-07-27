@@ -48,6 +48,9 @@ public:
     boolean assertEqualBuffer(char *, char *, int);
     boolean assertEqualBuffer(char *, char *, int, const char *);
     boolean assertEqualBuffer(char *, char *, int, const char *, int);
+    boolean assertEqualBuffer(uint8_t *, uint8_t *, int);
+    boolean assertEqualBuffer(uint8_t *, uint8_t *, int, const char *);
+    boolean assertEqualBuffer(uint8_t *, uint8_t *, int, const char *, int);
     boolean assertEqualHex(byte, byte);
     boolean assertEqualHex(byte, byte, const char *);
     boolean assertEqualHex(byte, byte, const char *, int);
@@ -163,7 +166,7 @@ public:
 
     void begin(void);
     void end(void);
-    void describe(char *title);
+    void describe(char *);
     void detail(char *);
     void it(char *);
 
@@ -177,6 +180,7 @@ private:
     HardwareSerial *_hardwareSerial;
 
     void printLLNumber(unsigned long long, uint8_t);
+    void perfectPrintByteHex(uint8_t);
     boolean printTestResultWithMsg(boolean, const char *);
     boolean printTestResultWithMsgAndLine(boolean, const char *, int);
     void printVerboseFailMessage(boolean, boolean);
@@ -192,6 +196,7 @@ private:
     void printVerboseFailMessage(unsigned long long, unsigned long long);
     void printVerboseFailMessageHex(uint8_t, uint8_t);
     void printVerboseFailMessageBuffer(char *, char *, int);
+    void printVerboseFailMessageBuffer(uint8_t *, uint8_t *, int);
     void printVerboseFailMessageIntBetween(int, int, int);
     void printVerboseFailMessageIntBetweenInclusive(int, int, int);
 
