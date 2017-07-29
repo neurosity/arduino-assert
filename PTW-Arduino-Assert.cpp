@@ -134,7 +134,7 @@ boolean PTW_Arduino_Assert::assertFalse(boolean isFalse) {
   return passed;
 }
 boolean PTW_Arduino_Assert::assertFalse(boolean isFalse, const char *msg) {
-  boolean testPassed = printTestResultWithMsg(assertTrue(isFalse), msg);
+  boolean testPassed = printTestResultWithMsg(assertFalse(isFalse), msg);
 
   if (failVerbosity && !testPassed) {
     printVerboseFailMessage(isFalse, (boolean)false);
@@ -1501,9 +1501,14 @@ void PTW_Arduino_Assert::printVerboseFailMessageBuffer(char *actual, char *expec
 void PTW_Arduino_Assert::printVerboseFailMessageBuffer(uint8_t *actual, uint8_t *expected, int length) {
   for (int i = 0; i < length; i++) {
     if (_hardwareSerial) {
-      _hardwareSerial->print("     Index: "); _hardwareSerial->println(i);
-      _hardwareSerial->print("      Expected:  "); perfectPrintByteHex(expected[i]); Serial.println();
-      _hardwareSerial->print("      Actual:    "); perfectPrintByteHex(actual[i]); Serial.println();
+      if (actual[i]==expected[i]) {
+        _hardwareSerial->print("     Index: "); _hardwareSerial->print(i);
+        _hardwareSerial->print(" -  "); perfectPrintByteHex(actual[i]); Serial.println();
+      } else {
+        _hardwareSerial->print("     Index: "); _hardwareSerial->println(i);
+        _hardwareSerial->print("      Expected:  "); perfectPrintByteHex(expected[i]); Serial.println();
+        _hardwareSerial->print("      Actual:    "); perfectPrintByteHex(actual[i]); Serial.println();
+      }
     }
   }
 }
