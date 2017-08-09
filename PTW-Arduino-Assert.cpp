@@ -21,6 +21,36 @@ PTW_Arduino_Assert::PTW_Arduino_Assert() {
 /** PUBLIC METHODS *********************************/
 /***************************************************/
 
+// FORCE
+boolean PTW_Arduino_Assert::fail(void) {
+  numberOfTests++;
+  numberOfTestsFailed++;
+  return false;
+}
+boolean PTW_Arduino_Assert::fail(const char *msg) {
+  return printTestResultWithMsg(fail(), msg);;
+}
+
+boolean PTW_Arduino_Assert::fail(const char *msg, int lineNumber) {
+  return printTestResultWithMsgAndLine(fail(), msg, lineNumber);
+}
+
+
+boolean PTW_Arduino_Assert::pass(void) {
+  numberOfTests++;
+  numberOfTestsPassed++;
+  return true;
+}
+
+boolean PTW_Arduino_Assert::pass(const char *msg) {
+  return printTestResultWithMsg(pass(), msg);;
+}
+
+boolean PTW_Arduino_Assert::pass(const char *msg, int lineNumber) {
+  return printTestResultWithMsgAndLine(pass(), msg, lineNumber);
+}
+
+
 boolean PTW_Arduino_Assert::assertApproximately(float actual, float expected, float epsilon) {
   numberOfTests++;
   boolean passed = false;
@@ -1286,7 +1316,7 @@ boolean PTW_Arduino_Assert::assertBetweenInclusive(int actual, int lower, int up
 void PTW_Arduino_Assert::begin(void) {
   if (_hardwareSerial) {
     _hardwareSerial->println("-------------------------------");
-    _hardwareSerial->println("-- PTW-Arduino-Assert v1.0.0 --");
+    _hardwareSerial->println("-- PTW-Arduino-Assert v1.1.0 --");
     _hardwareSerial->println("-------------------------------");
     _hardwareSerial->println("------- AUTO TEST BEGIN -------");
     _hardwareSerial->println("-------------------------------");

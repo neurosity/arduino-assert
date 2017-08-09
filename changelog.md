@@ -1,3 +1,13 @@
+# v1.1.0
+
+### New Features
+
+* Add functions for `pass` and `fail`. i.e. `test.pass("passed all tests")`;
+
+### Fixes
+
+* library.properties file
+
 # v1.0.0
 
 Now on the Arduino library manager.

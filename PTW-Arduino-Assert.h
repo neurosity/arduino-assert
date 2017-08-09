@@ -27,6 +27,13 @@ class PTW_Arduino_Assert {
 
 public:
     PTW_Arduino_Assert();
+    // FORCE
+    boolean fail();
+    boolean fail(const char *);
+    boolean fail(const char *, int);
+    boolean pass();
+    boolean pass(const char *);
+    boolean pass(const char *, int);
     // FLOATS
     boolean assertApproximately(float, float, float);
     boolean assertApproximately(float, float, float, const char *);
