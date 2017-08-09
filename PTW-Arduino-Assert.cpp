@@ -1316,7 +1316,7 @@ boolean PTW_Arduino_Assert::assertBetweenInclusive(int actual, int lower, int up
 void PTW_Arduino_Assert::begin(void) {
   if (_hardwareSerial) {
     _hardwareSerial->println("-------------------------------");
-    _hardwareSerial->println("-- PTW-Arduino-Assert v1.1.0 --");
+    _hardwareSerial->println("-- PTW-Arduino-Assert v1.1.1 --");
     _hardwareSerial->println("-------------------------------");
     _hardwareSerial->println("------- AUTO TEST BEGIN -------");
     _hardwareSerial->println("-------------------------------");
